@@ -15,7 +15,7 @@ public class TestPowerOutagesDAO {
 			
 			PowerOutageDAO dao = new PowerOutageDAO() ;
 			
-			for(PowerOutage po : dao.getPowerOutages(14, 10))
+			for(PowerOutage po : dao.getPowerOutages(10, 100))
 				System.out.println(po.getId() + " " + po.getDateEventBegan().getHour() + " " + po.getDateEventFinished());
 
 		} catch (Exception e) {

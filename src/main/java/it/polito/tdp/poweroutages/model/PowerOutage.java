@@ -120,10 +120,10 @@ public class PowerOutage {
 		return "Id:" + this.id + " OreGuasto:" + this.calcolaOre() + " Anno:" + this.dateEventBegan.getYear() +" CustomersAffected:" + this.customersAffected;
 	}
 
-	private long calcolaOre() {
+	private int calcolaOre() {
 		long f = this.dateEventFinished.toEpochSecond(ZoneOffset.UTC);
 		long b = this.dateEventBegan.toEpochSecond(ZoneOffset.UTC);
-		long diff = (f - b);
+		int diff = (int) (f - b);
 		return diff/3600;
 	}
 	

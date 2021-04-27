@@ -1,6 +1,5 @@
 package it.polito.tdp.poweroutages.model;
 
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +12,7 @@ public class Model {
 	List<PowerOutage> partenza;
 	List<PowerOutage> result;
 	int totCustomersOttimo;
+	int totOreGuasto;
 	
 	public Model() {
 		podao = new PowerOutageDAO();
@@ -24,6 +24,9 @@ public class Model {
 	
 	public int getTotCustomersOttimo() {
 		return this.totCustomersOttimo;
+	}
+	public int getTotOreGuasto() {
+		return this.totOreGuasto;
 	}
 	
 	public List<PowerOutage> getSelectedPowerOutages(int nercId, int anni, int ore){
@@ -42,23 +45,25 @@ public class Model {
 		int totaleOre = this.sommaOre(parziale);
 		if(totaleOre > nOre)	//ho superato le ore richieste
 			return;
-		if(totaleOre == nOre) { //ho raggiunto l'obiettivo e controllo se la sequenza è ottima
+		else { //controllo se la sequenza è ottima
 			int totCustomers = this.sommaCustomers(parziale);
 			if(totCustomers > totCustomersOttimo) {
 				result = new ArrayList<PowerOutage>(parziale);
 				totCustomersOttimo = totCustomers;
+				totOreGuasto = totaleOre;
 			}
-			return;
 		}
+		
 		if(livello == partenza.size()) //non ho più outages da aggiungere
 			return;
 		
 		//genero sottoproblemi
 		parziale.add(partenza.get(livello)); //provo con il PowerOutage corrente
-		if(this.differenzaAnniAccettabile(parziale, nAnni))
+		if(this.differenzaAnniAccettabile(parziale, nAnni)) {
 			cerca(parziale, livello+1, nAnni, nOre);
 		
-		parziale.remove(partenza.get(livello)); //backtracking
+			parziale.remove(partenza.get(livello)); //backtracking
+		}
 		
 		
 	}

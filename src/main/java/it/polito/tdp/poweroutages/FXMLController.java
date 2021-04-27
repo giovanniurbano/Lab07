@@ -54,7 +54,8 @@ public class FXMLController {
     		else {
     			for(PowerOutage po : outages)
     				txtResult.appendText(po + "\n");
-    			txtResult.appendText("Totale clienti coinvolti: " + this.model.getTotCustomersOttimo());
+    			txtResult.appendText("Totale clienti coinvolti: " + this.model.getTotCustomersOttimo() +
+    					"\nTotale ore guasto: " + this.model.getTotOreGuasto());
     		}
     	}
     	catch(NumberFormatException nfe) {
