@@ -52,9 +52,9 @@ public class FXMLController {
     		if(outages.isEmpty())
     			txtResult.setText("Nessuna sequenza possibile");
     		else {
-    			//String oreGuasto = "" + (int)this.model.getTotOreGuasto() + "h" + (int)((this.model.getTotOreGuasto()%1)*60) +"min";
+    			String oreGuasto = "" + (int)this.model.getTotOreGuasto() + "h" + (int)((this.model.getTotOreGuasto()%1)*60) +"min";
     			txtResult.appendText("Tot people affected: " + this.model.getTotCustomersOttimo() +
-    					"\nTot hours of outage: " + this.model.getTotOreGuasto() + "\n");
+    					"\nTot hours of outage: " + oreGuasto + "\n");
     			for(PowerOutage po : outages)
     				txtResult.appendText(po + "\n");
     		}
