@@ -5,9 +5,11 @@
 package it.polito.tdp.poweroutages;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import it.polito.tdp.poweroutages.model.Model;
 import it.polito.tdp.poweroutages.model.Nerc;
+import it.polito.tdp.poweroutages.model.PowerOutage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -39,6 +41,25 @@ public class FXMLController {
     @FXML
     void doRun(ActionEvent event) {
     	txtResult.clear();
+    	Nerc n = cmbNerc.getValue();
+    	String years = txtYears.getText();
+    	String hours = txtHours.getText();
+    	try {
+    		int anni = Integer.parseInt(years);
+    		int ore = Integer.parseInt(hours);
+    		
+    		List<PowerOutage> outages = this.model.getSelectedPowerOutages(n.getId(), anni, ore);
+    		if(outages.isEmpty())
+    			txtResult.setText("Nessuna sequenza possibile");
+    		else {
+    			for(PowerOutage po : outages)
+    				txtResult.appendText(po + "\n");
+    			txtResult.appendText("Totale clienti coinvolti: " + this.model.getTotCustomersOttimo());
+    		}
+    	}
+    	catch(NumberFormatException nfe) {
+    		txtResult.setText("I campi anni e ore ammettono solo valori numerici");
+    	}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
