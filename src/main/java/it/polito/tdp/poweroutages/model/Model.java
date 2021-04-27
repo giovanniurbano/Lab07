@@ -12,7 +12,7 @@ public class Model {
 	List<PowerOutage> partenza;
 	List<PowerOutage> result;
 	int totCustomersOttimo;
-	int totOreGuasto;
+	float totOreGuasto;
 	
 	public Model() {
 		podao = new PowerOutageDAO();
@@ -25,7 +25,7 @@ public class Model {
 	public int getTotCustomersOttimo() {
 		return this.totCustomersOttimo;
 	}
-	public int getTotOreGuasto() {
+	public float getTotOreGuasto() {
 		return this.totOreGuasto;
 	}
 	
@@ -42,7 +42,7 @@ public class Model {
 
 	private void cerca(List<PowerOutage> parziale, int livello, int nAnni, int nOre) {
 		//casi terminali
-		int totaleOre = this.sommaOre(parziale);
+		float totaleOre = this.sommaOre(parziale);
 		if(totaleOre > nOre)	//ho superato le ore richieste
 			return;
 		else { //controllo se la sequenza è ottima
@@ -89,12 +89,12 @@ public class Model {
 		return false;
 	}
 
-	private int sommaOre(List<PowerOutage> parziale) {
-		int tot = 0;
+	private float sommaOre(List<PowerOutage> parziale) {
+		float tot = 0;
 		for(PowerOutage po : parziale){
 			long f = po.getDateEventFinished().toEpochSecond(ZoneOffset.UTC);
 			long b = po.getDateEventBegan().toEpochSecond(ZoneOffset.UTC);
-			int diff = (int) (f - b);
+			float diff = (float) (f - b);
 			tot += (diff/3600);
 		}
 		
