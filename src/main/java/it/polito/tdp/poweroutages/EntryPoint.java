@@ -23,8 +23,7 @@ public class EntryPoint extends Application {
         Scene scene = new Scene(root);
 
         controller = loader.getController();
-    	
-        // TODO impostare il model nel controller   
+    	 
         Model model = new Model();
         controller.setModel(model);
                 
