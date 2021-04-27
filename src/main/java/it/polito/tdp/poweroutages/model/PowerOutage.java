@@ -117,9 +117,9 @@ public class PowerOutage {
 
 	@Override
 	public String toString() {
-		return "Id:" + this.id + " OreGuasto:" + this.calcolaOre() + " Anno:" + this.dateEventBegan.getYear() +" CustomersAffected:" + this.customersAffected;
+		return this.dateEventBegan.getYear() + " " + this.dateEventBegan + " " + this.dateEventFinished + " " + this.calcolaOre() + " " + this.customersAffected;
 	}
-
+	
 	private int calcolaOre() {
 		long f = this.dateEventFinished.toEpochSecond(ZoneOffset.UTC);
 		long b = this.dateEventBegan.toEpochSecond(ZoneOffset.UTC);

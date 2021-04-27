@@ -42,7 +42,8 @@ public class PowerOutageDAO {
 		final String sql = "SELECT * "
 				+ "FROM poweroutages "
 				+ "WHERE to_seconds(date_event_finished) - to_seconds(date_event_began) <= ? "
-				+ "AND nerc_id = ?";
+				+ "AND nerc_id = ? "
+				+ "ORDER BY YEAR(date_event_began) ASC";
 		List<PowerOutage> outages = new ArrayList<>();
 		try {
 			Connection conn = ConnectDB.getConnection();

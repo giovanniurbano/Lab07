@@ -12,7 +12,7 @@ public class Model {
 	List<PowerOutage> partenza;
 	List<PowerOutage> result;
 	int totCustomersOttimo;
-	float totOreGuasto;
+	int totOreGuasto;
 	
 	public Model() {
 		podao = new PowerOutageDAO();
@@ -25,7 +25,7 @@ public class Model {
 	public int getTotCustomersOttimo() {
 		return this.totCustomersOttimo;
 	}
-	public float getTotOreGuasto() {
+	public int getTotOreGuasto() {
 		return this.totOreGuasto;
 	}
 	
@@ -42,7 +42,7 @@ public class Model {
 
 	private void cerca(List<PowerOutage> parziale, int livello, int nAnni, int nOre) {
 		//casi terminali
-		float totaleOre = this.sommaOre(parziale);
+		int totaleOre = this.sommaOre(parziale);
 		if(totaleOre > nOre)	//ho superato le ore richieste
 			return;
 		else { //controllo se la sequenza è ottima
@@ -58,13 +58,12 @@ public class Model {
 			return;
 		
 		//genero sottoproblemi	
-		if(this.differenzaAnniAccettabile(parziale, nAnni)) {
-			parziale.add(partenza.get(livello)); //provo con il PowerOutage corrente
+		parziale.add(partenza.get(livello)); //provo con il PowerOutage corrente
+		if(this.differenzaAnniAccettabile(parziale, nAnni))	
 			cerca(parziale, livello+1, nAnni, nOre);
 		
-			parziale.remove(partenza.get(livello)); //e senza
-			cerca(parziale, livello+1, nAnni, nOre);
-		}
+		parziale.remove(partenza.get(livello)); //e senza
+		cerca(parziale, livello+1, nAnni, nOre);
 		
 		
 	}
@@ -89,12 +88,12 @@ public class Model {
 		return false;
 	}
 
-	private float sommaOre(List<PowerOutage> parziale) {
-		float tot = 0;
+	private int sommaOre(List<PowerOutage> parziale) {
+		int tot = 0;
 		for(PowerOutage po : parziale){
 			long f = po.getDateEventFinished().toEpochSecond(ZoneOffset.UTC);
 			long b = po.getDateEventBegan().toEpochSecond(ZoneOffset.UTC);
-			float diff = (float) (f - b);
+			int diff = (int) (f - b);
 			tot += (diff/3600);
 		}
 		
