@@ -57,12 +57,13 @@ public class Model {
 		if(livello == partenza.size()) //non ho più outages da aggiungere
 			return;
 		
-		//genero sottoproblemi
-		parziale.add(partenza.get(livello)); //provo con il PowerOutage corrente
+		//genero sottoproblemi	
 		if(this.differenzaAnniAccettabile(parziale, nAnni)) {
+			parziale.add(partenza.get(livello)); //provo con il PowerOutage corrente
 			cerca(parziale, livello+1, nAnni, nOre);
 		
-			parziale.remove(partenza.get(livello)); //backtracking
+			parziale.remove(partenza.get(livello)); //e senza
+			cerca(parziale, livello+1, nAnni, nOre);
 		}
 		
 		
