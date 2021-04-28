@@ -1,5 +1,6 @@
 package it.polito.tdp.poweroutages.model;
 
+import java.time.Duration;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +94,7 @@ public class Model {
 		for(PowerOutage po : parziale){
 			long f = po.getDateEventFinished().toEpochSecond(ZoneOffset.UTC);
 			long b = po.getDateEventBegan().toEpochSecond(ZoneOffset.UTC);
+			//long differenza = Duration.between(po.getDateEventBegan(), po.getDateEventFinished()).getSeconds();
 			float diff = (float) (f - b);
 			tot += (diff/3600);
 		}
