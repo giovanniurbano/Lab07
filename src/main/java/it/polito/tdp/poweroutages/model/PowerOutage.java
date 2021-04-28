@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 public class PowerOutage {
-	Integer id;
-	int eventTypeId;
-	int tagId;
-	int areaId;
-	int nercId;
-	int responsibleId;
-	int customersAffected;
-	LocalDateTime dateEventBegan;
-	LocalDateTime dateEventFinished;
-	int demandLoss;
+	private Integer id;
+	private int eventTypeId;
+	private int tagId;
+	private int areaId;
+	private int nercId;
+	private int responsibleId;
+	private int customersAffected;
+	private LocalDateTime dateEventBegan;
+	private LocalDateTime dateEventFinished;
+	private int demandLoss;
 	
 	public PowerOutage(Integer id, int eventTypeId, int tagId, int areaId, int nercId, int responsibleId,
 			int customersAffected, LocalDateTime dateEventBegan, LocalDateTime dateEventFinished, int demandLoss) {

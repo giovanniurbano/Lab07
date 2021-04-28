@@ -9,11 +9,11 @@ import it.polito.tdp.poweroutages.DAO.PowerOutageDAO;
 
 public class Model {
 	
-	PowerOutageDAO podao;
-	List<PowerOutage> partenza;
-	List<PowerOutage> result;
-	int totCustomersOttimo;
-	float totOreGuasto;
+	private PowerOutageDAO podao;
+	private List<PowerOutage> partenza;
+	private List<PowerOutage> result;
+	private int totCustomersOttimo;
+	private float totOreGuasto;
 	
 	public Model() {
 		podao = new PowerOutageDAO();
